@@ -9,15 +9,20 @@
     if any data has been sent via the GET/POST methods.
 
     - $_GET - global var (array where name of input is stored)
+
+    - XSS attacks
+    Adding JS to an entry field such as
+    <script>window.location="url"</script>
+    redirects to urls
 */
 
 if(isset($_POST['submit'])) {
-   echo($_POST['firstName']);
-   echo($_POST['lastName']);
-   echo($_POST['email']);
-   echo($_POST['password']);
-   echo($_POST['select-dev-level']);
-   echo($_POST['select-skill-level']);
+   echo htmlspecialchars($_POST['firstName']);
+   echo htmlspecialchars($_POST['lastName']);
+   echo htmlspecialchars($_POST['email']);
+   echo htmlspecialchars($_POST['password']);
+   echo htmlspecialchars($_POST['select-dev-level']);
+   echo htmlspecialchars($_POST['select-skill-level']);
 }
 ?>
 <!-- HTML DOM --> 
