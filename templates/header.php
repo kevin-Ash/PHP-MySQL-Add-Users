@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii" crossorigin="anonymous">
 
     <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
         h1,h2,h3,h4,h5 {
             margin: 1rem 0;
         }
@@ -23,17 +27,27 @@
         .btn {
             border-radius: 0.25rem;
         }
+        .page-wrap {
+           margin-bottom: 4.5rem;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 4.5rem;
+        }
     </style>
 </head>
 <body>
 
+<div class="page-wrap">
 <!-- Main nav -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary ">
     
     <div class="container">
 
         <!-- Logo -->
-        <a class="navbar-brand" href="index.php"><h1>PHP & MySQL</h1></a>
+        <a class="navbar-brand" href="#"><h1>PHP & MySQL</h1></a>
         
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-target" aria-controls="nav-target" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +57,7 @@
         
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="index.php">Home
                     <span class="sr-only">(current)</span>
                     </a>
                 </li>
