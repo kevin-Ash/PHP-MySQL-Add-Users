@@ -13,9 +13,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii" crossorigin="anonymous">
 
     <style>
-        li, a, p {
+        h1,h2,h3,h4,h5 {
+            margin: 1rem 0;
+        }
+        .btn, li, a, p {
             font-size: 15.5px;
             font-weight: 400;
+        }
+        .btn {
+            border-radius: 0.25rem;
         }
     </style>
 </head>
@@ -35,7 +41,7 @@
 
             <div class="navbar-collapse collapse show" id="nav-target" >
         
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                     <span class="sr-only">(current)</span>
