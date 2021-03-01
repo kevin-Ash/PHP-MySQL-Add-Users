@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    
+<!-- Head template -->    
 <?php include('./templates/header.php') ?>
-
+<!-- Footer template -->
 <?php include('./templates/footer.php') ?>
