@@ -56,9 +56,9 @@
             <div class="navbar-collapse collapse show" id="nav-target" >
         
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li id="#home" class="nav-item active">
                     <a class="nav-link" href="index.php">Home
-                    <span class="sr-only">(current)</span>
+                    <span id="current" class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">

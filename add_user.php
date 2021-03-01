@@ -5,7 +5,7 @@
     if data submitted then return the required page,
     else return the empty form submission page.
 
-    - isset() - checks if variable value has been set
+    - isset($_GET['key name']) - checks if variable value has been set
     if any data has been sent via the GET/POST methods.
 
     - $_GET - global var (array where name of input is stored)
@@ -14,17 +14,64 @@
     Adding JS to an entry field such as
     <script>window.location="url"</script>
     redirects to urls
+    htmlspecialchars() converts into html encoded characters
+
+    - Form Validation
+    built in empty() function
 */
 
 if(isset($_POST['submit'])) {
-   echo htmlspecialchars($_POST['firstName']);
-   echo htmlspecialchars($_POST['lastName']);
-   echo htmlspecialchars($_POST['email']);
-   echo htmlspecialchars($_POST['password']);
-   echo htmlspecialchars($_POST['select-dev-level']);
-   echo htmlspecialchars($_POST['select-skill-level']);
+    if(empty($_POST['firstName'])){
+        echo('A first name is required! <br>');
+    } else {
+        /* echo htmlspecialchars($_POST['firstName ']); */
+        $firstName = $_POST['firstName'];
+        if(!preg_match('/^[a-zA_Z]+$/', $firstName)) {
+            echo('First name can contain only letters & spaces <br>');
+        }
+    }
+    if(empty($_POST['lastName'])){
+        echo('Last name is required! <br>');
+    } else {
+       /*  echo htmlspecialchars($_POST['lastName']); */
+       $lastName = $_POST['lastName'];
+       /* 
+        - Inside delimiter / /
+        - from start ^
+        - including range a-z
+        - A_Z ?
+        - one or more +
+        - to end $
+        */
+       if(!preg_match('/^[a-zA_Z]+$/', $lastName)) {
+        echo('Last name can contain only letters & spaces <br>');
+    }
+    }
+    if(empty($_POST['email'])) {
+        echo('A valid email address is required <br>');
+    } else {
+        /* echo htmlspecialchars($_POST['email']); */
+        $email = $_POST['email'];
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            echo('Not a valid email address, please try again <br>');
+        }else{}
+    }
+    if(empty($_POST['select-dev-level'])){
+        echo('Your developer level is required! <br>');
+    } else {
+        echo htmlspecialchars($_POST['select-dev-level']);
+    }
+    if(empty($_POST['select-skill-level'])){
+        echo('Your skill level is required! <br>');
+    } else {
+        echo htmlspecialchars($_POST['select-skill-level']);
+    }
 }
+
+
+
 ?>
+
 <!-- HTML DOM --> 
 <!DOCTYPE html>
 
@@ -57,15 +104,11 @@ if(isset($_POST['submit'])) {
                     <input type="text" name="email" class="form-control" id="emailAddress" aria-describedby="inputEmail" placeholder="example@address.com">
                     <small id="inputEmail" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-
-                <div class="form-group">
-                    <label for="passwordInput" class="col-form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Password">
-                </div>
-
+                
                 <div class="form-group">
                 <label for="profession" class="col-form-label">Profession</label>
                     <select name="select-dev-level" class="form-control custom-select" id="profLevelSel">
+                        <option value="" selected>Select your developer level</option>
                         <option>Entry level developer</option>
                         <option>Junior developer</option>
                         <option>Senior developer</option>
@@ -77,6 +120,7 @@ if(isset($_POST['submit'])) {
                 <div class="form-group">
                 <label for="skill-level" class="col-form-label">Skill Level</label>
                     <select name="select-skill-level" class="form-control custom-select" id="xpLevelSel">
+                        <option value="" selected>Select your skill level</option>
                         <option>Beginner</option>
                         <option>Intermediate</option>
                         <option>Advanced</option>
