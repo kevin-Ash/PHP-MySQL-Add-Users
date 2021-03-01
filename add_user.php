@@ -14,28 +14,30 @@
     Adding JS to an entry field such as
     <script>window.location="url"</script>
     redirects to urls
-    htmlspecialchars() converts into html encoded characters
+    htmlspecialchars() converts into html entities, e.g. tags <p></p> gets converted into special html characters
 
     - Form Validation
     built in empty() function
 */
 
+/* 
+    - Associative (key => value) array for error messages
+    initialize with empty value to store value for set key
+*/
+$errors = array(
+    'firstName' => '', 
+    'lastname' => '', 
+    'email' => '',
+    'dev-level' => '', 
+    'skill-level' => '');
+
 if(isset($_POST['submit'])) {
     if(empty($_POST['firstName'])){
-        echo('A first name is required! <br>');
+        $errors['firstName'] = 'A first name is required! <br>';
     } else {
         /* echo htmlspecialchars($_POST['firstName ']); */
-        $firstName = $_POST['firstName'];
-        if(!preg_match('/^[a-zA_Z]+$/', $firstName)) {
-            echo('First name can contain only letters & spaces <br>');
-        }
-    }
-    if(empty($_POST['lastName'])){
-        echo('Last name is required! <br>');
-    } else {
-       /*  echo htmlspecialchars($_POST['lastName']); */
-       $lastName = $_POST['lastName'];
-       /* 
+
+         /* 
         - Inside delimiter / /
         - from start ^
         - including range a-z
@@ -43,29 +45,41 @@ if(isset($_POST['submit'])) {
         - one or more +
         - to end $
         */
+
+        $firstName = $_POST['firstName'];
+        if(!preg_match('/^[a-zA_Z]+$/', $firstName)) {
+            $errors['firstName'] = 'First name can contain only letters & spaces <br>';
+        }
+    }
+    if(empty($_POST['lastName'])){
+        $errors['lastName'] = 'Last name is required! <br>';
+    } else {
+       /*  echo htmlspecialchars($_POST['lastName']); */
+
+       $lastName = $_POST['lastName'];      
        if(!preg_match('/^[a-zA_Z]+$/', $lastName)) {
-        echo('Last name can contain only letters & spaces <br>');
+        $errors['lastName'] = 'Last name can contain only letters & spaces <br>';
     }
     }
     if(empty($_POST['email'])) {
-        echo('A valid email address is required <br>');
+        $errors['email'] = 'A valid email address is required <br>';
     } else {
         /* echo htmlspecialchars($_POST['email']); */
         $email = $_POST['email'];
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            echo('Not a valid email address, please try again <br>');
-        }else{}
+            $errors['email'] = 'Not a valid email address, please try again <br>';
+        }
     }
     if(empty($_POST['select-dev-level'])){
-        echo('Your developer level is required! <br>');
-    } else {
-        echo htmlspecialchars($_POST['select-dev-level']);
-    }
+        $errors['dev-level'] = 'Your developer level is required! <br>';
+    } 
+    /* echo htmlspecialchars($_POST['select-dev-level']); */
+    
     if(empty($_POST['select-skill-level'])){
-        echo('Your skill level is required! <br>');
-    } else {
-        echo htmlspecialchars($_POST['select-skill-level']);
+        $errors['dev-level'] = 'Your skill level is required! <br>';
     }
+    /*  echo htmlspecialchars($_POST['select-skill-level']); */
+   
 }
 
 
@@ -76,8 +90,10 @@ if(isset($_POST['submit'])) {
 <!DOCTYPE html>
 
 <html lang="en">
-    
+<!-- Head template -->   
 <?php include('./templates/header.php') ?>
+
+<!-- Form -->
 <section id="add-user-form" class="container">
 
 <h4>Add a User to Database</h4>
@@ -107,7 +123,7 @@ if(isset($_POST['submit'])) {
                 
                 <div class="form-group">
                 <label for="profession" class="col-form-label">Profession</label>
-                    <select name="select-dev-level" class="form-control custom-select" id="profLevelSel">
+                    <select name="select-dev-level" class="form-control custom-select" id="profLevelSelect">
                         <option value="" selected>Select your developer level</option>
                         <option>Entry level developer</option>
                         <option>Junior developer</option>
@@ -119,7 +135,7 @@ if(isset($_POST['submit'])) {
 
                 <div class="form-group">
                 <label for="skill-level" class="col-form-label">Skill Level</label>
-                    <select name="select-skill-level" class="form-control custom-select" id="xpLevelSel">
+                    <select name="select-skill-level" class="form-control custom-select" id="xpLevelSelect">
                         <option value="" selected>Select your skill level</option>
                         <option>Beginner</option>
                         <option>Intermediate</option>
@@ -131,4 +147,5 @@ if(isset($_POST['submit'])) {
         </form>
     
 </section>
+<!-- Footer template -->
 <?php include('./templates/footer.php') ?>
